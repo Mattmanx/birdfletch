@@ -13,6 +13,7 @@ var mainState = {
         // Load the bird sprite
         game.load.image('bird', 'assets/bird.png');   
         game.load.image('pipe', 'assets/pipe.png');
+        game.load.image('atlanta-bg', 'assets/bg_tile.png');
         game.load.audio('jump', 'assets/jump.wav'); 
     },
 
@@ -20,6 +21,9 @@ var mainState = {
             // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        //background
+        this.bgtile = game.add.tileSprite(0, 0, game.stage.bounds.width, game.cache.getImage('atlanta-bg').height, 'atlanta-bg');
+        
         // Display the bird on the screen
         this.bird = this.game.add.sprite(100, 245, 'bird');
         this.bird.anchor.setTo(-0.2, 0.5); 
@@ -54,6 +58,8 @@ var mainState = {
         if (this.bird.angle < 20) {
             this.bird.angle += 1;
         }
+        
+        this.bgtile.tilePosition.x -= 1;
         
         game.physics.arcade.overlap(this.bird, this.pipes, this.hitPipe, null, this);
     },
