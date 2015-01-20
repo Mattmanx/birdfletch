@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+
+        minSdkVersion 15
+        targetSdkVersion 19
+
+        ndk {
+            moduleName "andengine_shared"
+        }
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = [] // This needs to be done so that gradle does not know about your jni. There are errors otherwise
+            jniLibs.srcDirs = ['jniLibs']
+        }
+    }
+    buildTypes {
+        release {
+            //runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
